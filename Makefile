@@ -6,7 +6,7 @@
 #    By: vgauther <vgauther@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/23 13:56:44 by vgauther          #+#    #+#              #
-#    Updated: 2018/01/23 14:07:58 by vgauther         ###   ########.fr        #
+#    Updated: 2018/01/23 15:44:54 by vgauther         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ OBJ_NAME = $(SRC_NAME:.c=.o)
 
 INC_NAME = wolf_3d.h
 
-SRC_NAME = main.c error.c
+SRC_NAME = main.c error.c ft_countwords.c ft_open_n_read.c
 
 all: $(NAME)
 
