@@ -6,7 +6,7 @@
 /*   By: vgauther <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 15:25:35 by vgauther          #+#    #+#             */
-/*   Updated: 2018/01/24 13:35:31 by vgauther         ###   ########.fr       */
+/*   Updated: 2018/01/24 16:17:25 by vgauther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@
 ** structures
 */
 
+typedef struct	s_cam
+{
+	int		pos_x;
+	int		pos_y;
+}				t_cam;
+
 typedef struct	s_bloc
 {
 	int		hei;
@@ -43,6 +49,7 @@ typedef struct	s_player
 {
 	int		hei;
 	int		angle_de_vue;
+	t_cam	cam;
 }				t_player;
 
 typedef struct	s_mlx_data
@@ -59,7 +66,7 @@ typedef struct	s_img
 
 typedef struct	s_map
 {
-	char	**map;
+	int		**map;
 	int		len;
 	int		hei;
 }				t_map;
