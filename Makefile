@@ -6,7 +6,7 @@
 #    By: vgauther <vgauther@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/23 13:56:44 by vgauther          #+#    #+#              #
-#    Updated: 2018/01/23 15:44:54 by vgauther         ###   ########.fr        #
+#    Updated: 2018/01/25 13:28:45 by vgauther         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ BOLDWHITE=\033[1m\033[37m
 NAME = wolf3d
 
 CC = gcc
-CC_FLAGS = -Wall -Werror -Wextra
+CC_FLAGS = -Wall -Werror -Wextra -g
 
 SRC_PATH = ./SRCS/
 INC_PATH = ./INC/
@@ -46,7 +46,7 @@ OBJ_NAME = $(SRC_NAME:.c=.o)
 
 INC_NAME = wolf_3d.h
 
-SRC_NAME = main.c error.c ft_countwords.c ft_open_n_read.c
+SRC_NAME = main.c error.c ft_countwords.c ft_open_n_read.c put_pixel_image.c mini_map.c
 
 all: $(NAME)
 

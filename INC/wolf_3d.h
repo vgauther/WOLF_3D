@@ -6,7 +6,7 @@
 /*   By: vgauther <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 15:25:35 by vgauther          #+#    #+#             */
-/*   Updated: 2018/01/24 16:17:25 by vgauther         ###   ########.fr       */
+/*   Updated: 2018/01/27 15:25:45 by vgauther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@
 /*
 ** structures
 */
+
+typedef struct	s_pixel
+{
+	int		x;
+	int		y;
+	int		color;
+}				t_pixel;
 
 typedef struct	s_cam
 {
@@ -62,6 +69,11 @@ typedef struct	s_img
 {
 	void	*img_ptr;
 	char	*str;
+	int		len;
+	int		hei;
+	int		bits;
+	int		size_line;
+	int		endian;
 }				t_img;
 
 typedef struct	s_map
@@ -70,6 +82,14 @@ typedef struct	s_map
 	int		len;
 	int		hei;
 }				t_map;
+
+typedef struct	s_param
+{
+	t_mlx_data	mlx;
+	t_map		map;
+	t_bloc		**b;
+	t_player	p;
+}				t_param;
 
 /*
 ** error.c
@@ -92,5 +112,16 @@ char	*ft_open_n_read(char *target);
 
 int	ft_countwords(char const *s, char c);
 
+/*
+** put_pixel_image.c
+*/
+
+void	put_pixel_image(t_pixel pixel, t_mlx_data mlx, t_img *img, int color);
+
+/*
+** mini_map.c
+*/
+
+void	mini_map(t_bloc **b, t_map map, t_mlx_data mlx);
 
 #endif

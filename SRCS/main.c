@@ -6,7 +6,7 @@
 /*   By: vgauther <vgauther@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 13:47:37 by vgauther          #+#    #+#             */
-/*   Updated: 2018/01/24 16:42:58 by vgauther         ###   ########.fr       */
+/*   Updated: 2018/01/27 15:47:10 by vgauther         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int		hook(int keycode, void *param)
 {
-	(void)param;
+	t_param *p;
+	p = (t_param *)param;
 	if(keycode == KEY_ESC)
 		exit (0);
 	return(0);
@@ -60,10 +61,11 @@ void	creat_map(char *target_name, t_map *map)
 	map->len = ft_countwords(tmp1[0], ' ');
 	while(tmp1[i])
 		i++;
+	printf("%d\n", i);
 	if(!(map->map = malloc(sizeof(int *) * i)))
 		malloc_error();
 	map->hei = 0;
-	while (map->map[map->hei])
+	while (map->hei != i)
 	{
 		if(!(map->map[map->hei] = malloc(sizeof(int) * map->len)))
 			malloc_error();
@@ -72,7 +74,7 @@ void	creat_map(char *target_name, t_map *map)
 		if (len_tmp != map->len)
 			map_error(1);
 		len_tmp = 0;
-		while(tmp2[len_tmp])
+		while(len_tmp != map->len)
 		{
 			map->map[map->hei][len_tmp] = ft_atoi(tmp2[len_tmp]);
 			len_tmp++;
@@ -85,7 +87,7 @@ t_bloc	**init_map(t_map map)
 {
 	int		x;
 	int		y;
-	t_bloc **b;
+	t_bloc	**b;
 
 	y = 0;
 	if(!(b = malloc(sizeof(t_bloc *) * map.hei)))
@@ -93,7 +95,7 @@ t_bloc	**init_map(t_map map)
 	while(y != map.hei)
 	{
 		if(!(b[y] = malloc(sizeof(t_bloc) * map.len)))
-				malloc_error();
+			malloc_error();
 		x = 0;
 		while(x != map.len)
 		{
@@ -113,29 +115,24 @@ void	init_player(t_player *p)
 	p->cam.pos_y = HEI_WIN / 2;
 	p->hei = 64 / 2; // division d'une unite par deux
 	p->angle_de_vue = 60; // 60 degres
-
 }
 
 int main(int argc, char **argv)
 {
-	t_mlx_data	mlx;
-	t_map		map;
+	t_param		param;
 	int			i;
-	t_bloc		**b;
-	t_player	p;
 
 	i = 0;
 	if (argc == 1)
 		usage();
-	creat_map(argv[1], &map);
-	b = init_map(map);
-	init_player(&p);
-	printf("%d\n",b[0][0].wall);
-	mlx.mlx = mlx_init();
-	mlx.win = mlx_new_window(mlx.mlx, LEN_WIN, HEI_WIN, "WOLF_3D");
-	print_map(mlx);
-	mlx_hook(mlx.win, 2, 0, hook, &mlx);
-	mlx_hook(mlx.win, 17, 0, ft_close, &mlx);
-	mlx_loop(mlx.mlx);
+	creat_map(argv[1], &param.map);
+	param.b = init_map(param.map);
+	init_player(&param.p);
+	param.mlx.mlx = mlx_init();
+	param.mlx.win = mlx_new_window(param.mlx.mlx, LEN_WIN, HEI_WIN, "WOLF_3D");
+	mini_map(param.b, param.map, param.mlx);
+	mlx_hook(param.mlx.win, 2, 0, hook, &param);
+	mlx_hook(param.mlx.win, 17, 0, ft_close, &param.mlx);
+	mlx_loop(param.mlx.mlx);
 	return (0);
 }
