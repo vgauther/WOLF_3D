@@ -1,1 +1,1 @@
-# WOLF_3D
+# wolf3d
